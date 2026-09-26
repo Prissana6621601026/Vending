@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;700&display=swap');
+
+body {
+  background: linear-gradient(135deg, #F7CBCA, #D5E5E5);
+  font-family: 'Prompt', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+.vending-body {
+  background: #F1F7F7;
+  border: 4px solid #D5E5E5;
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 900px;
+  display: grid;
+  grid-template-areas:
+    "lcd lcd"
+    "products panel"
+    "dispenser dispenser";
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  position: relative;
+}
+
+.lcd {
+  grid-area: lcd;
+  background: #5D6B6B;
+  color: #D5E5E5;
+  font-family: monospace;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  box-shadow: inset 0 0 15px #333;
+}
+
+.products-grid {
+  grid-area: products;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 15px;
+  padding: 10px;
+  background: #F1F7F7;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.product {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+}
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+.product img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #D5E5E5;
+}
+.product .name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #5D6B6B;
+  min-height: 2.2em;
+}
+.product .price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #F7CBCA;
+  text-shadow: 0 0 1px #5D6B6B;
+}
+.product .stock {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-bottom: 5px;
+}
+.product button {
+  background: #5D6B6B;
+  color: white;
+  padding: 6px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.product button:hover:not(:disabled) {
+  background: #78909c;
+}
+
+.control-panel {
+  grid-area: panel;
+  background: #E0F2FE;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.control-panel h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #5D6B6B;
+  border-bottom: 2px solid #D5E5E5;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+.payment-buttons button, .cash-buttons button, .control-panel > button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: transform 0.1s, opacity 0.2s;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.payment-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.payment-buttons button:first-child { /* Cash */
+    background: #5D6B6B;
+    color: white;
+}
+.payment-buttons button:nth-child(2) { /* QR */
+    background: #F7CBCA;
+    color: #5D6B6B;
+}
+
+.cash-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.cash-buttons button {
+    background: #D5E5E5;
+    color: #5D6B6B;
+    padding: 10px;
+}
+
+.control-panel > button { 
+    background: #ef4444; 
+    color: white;
+    margin-top: 15px;
+}
+
+.dispenser-area {
+    grid-area: dispenser;
+    background: #D5E5E5;
+    border-radius: 10px;
+    height: 80px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #5D6B6B;
+    font-weight: 600;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+.toast {
+  color: white;
+  padding: 12px 25px;
+  margin-top: 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  animation: fadeInOut 4s forwards;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.bg-red-500 { background: #ef4444; }
+.bg-green-500 { background: #22c55e; }
+.bg-orange-500 { background: #f97316; }
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+  .vending-body {
+    grid-template-areas:
+      "lcd"
+      "panel"
+      "products"
+      "dispenser";
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  .lcd { font-size: 1rem; padding: 15px; }
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .product img { width: 60px; height: 60px; }
+  .product .name { font-size: 0.8rem; }
+  .product .price { font-size: 1rem; }
+  .control-panel { padding: 15px; }
+}
